@@ -1593,6 +1593,7 @@ public final @Interned class Class<@UnknownKeyFor T> implements java.io.Serializ
      * @return the simple name of the underlying class
      * @since 1.5
      */
+    @SideEffectFree
     public @ClassGetSimpleName String getSimpleName() {
         ReflectionData<T> rd = reflectionData();
         String simpleName = rd.simpleName;
@@ -1602,6 +1603,7 @@ public final @Interned class Class<@UnknownKeyFor T> implements java.io.Serializ
         return simpleName;
     }
 
+    @SideEffectFree
     private String getSimpleName0() {
         if (isArray()) {
             return getComponentType().getSimpleName() + "[]";
@@ -3022,6 +3024,7 @@ public final @Interned class Class<@UnknownKeyFor T> implements java.io.Serializ
     private transient volatile int classRedefinedCount;
 
     // Lazily create and cache ReflectionData
+    @SideEffectFree
     private ReflectionData<T> reflectionData() {
         SoftReference<ReflectionData<T>> reflectionData = this.reflectionData;
         int classRedefinedCount = this.classRedefinedCount;
@@ -3036,6 +3039,7 @@ public final @Interned class Class<@UnknownKeyFor T> implements java.io.Serializ
         return newReflectionData(reflectionData, classRedefinedCount);
     }
 
+    @SideEffectFree
     private ReflectionData<T> newReflectionData(SoftReference<ReflectionData<T>> oldReflectionData,
                                                 int classRedefinedCount) {
         while (true) {
